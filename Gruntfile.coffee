@@ -14,6 +14,7 @@ module.exports = (grunt) ->
         options:
           specs: 'js/spec/**/*Spec.js',
           helpers: 'js/spec/**/*Helper.js'
+          vendor: 'js/vendor/**/*.js'
 
     coffee:
       compile:
