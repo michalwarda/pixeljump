@@ -2,8 +2,8 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     watch:
-      files: '**/*.coffee',
-      tasks: ['test'],
+      files: '**/*.coffee'
+      tasks: ['default']
       options:
         livereload: 
           port: 1337
@@ -21,7 +21,7 @@ module.exports = (grunt) ->
         expand: true,
         flatten: false,
         cwd: 'coffee/'
-        src: ['**/*.coffee'],
+        src: ['**/*.coffee']
         dest: 'js/',
         ext: '.js'
 
@@ -38,10 +38,14 @@ module.exports = (grunt) ->
           hostname: '0.0.0.0'
           livereload: 1337
 
+    clean: ['js/src', 'js/spec']
+
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-jasmine')
   grunt.loadNpmTasks('grunt-contrib-connect')
+  grunt.loadNpmTasks('grunt-contrib-clean')
 
   grunt.registerTask('test', ['coffee', 'jasmine'])
-  grunt.registerTask('serve', ['connect', 'watch'])
+  grunt.registerTask('default', ['clean', 'coffee', 'jasmine'])
+  grunt.registerTask('serve', ['connect', 'default', 'watch'])

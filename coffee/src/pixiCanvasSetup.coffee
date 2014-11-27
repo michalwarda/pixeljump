@@ -1,18 +1,12 @@
 class @PixiCanvasSetup
-  constructor: (canvasWidth = 540, canvasHeight = 960, backgroundColor= 0xffffff) ->
-    @createPixiStage(backgroundColor)
-    @createPixiRenderer(canvasWidth, canvasHeight)
-    @appendRendererViewToBody()
-    @renderPixiStage()
+  @CreatePixiStage: (backgroundColor) ->
+    new PIXI.Stage(backgroundColor)
 
-  createPixiStage: (backgroundColor) ->
-    window.stage = new PIXI.Stage(backgroundColor)
+  @CreatePixiRenderer: (canvasWidth, canvasHeight) ->
+    PIXI.autoDetectRenderer(canvasWidth, canvasHeight)
 
-  createPixiRenderer: (canvasWidth, canvasHeight) ->
-    window.renderer = PIXI.autoDetectRenderer(canvasWidth, canvasHeight)
-
-  appendRendererViewToBody: () ->
+  @AppendRendererViewToBody: (renderer) ->
     document.body.appendChild(renderer.view)
 
-  renderPixiStage: () ->
+  @RenderPixiStage: (renderer, stage) ->
     renderer.render(stage)

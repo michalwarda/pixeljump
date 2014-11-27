@@ -1,28 +1,25 @@
-describe "Pixi Stage Creator", ->
-  afterEach ->
-    document.body.removeChild(document.querySelector('canvas'))
-    stage = undefined
-    renderer = undefined
+describe 'Pixi Stage Creator', ->
+  describe 'CreatePixiStage', ->
+    it 'creates a Pixi Stage object with provided background color', ->
+      stage = PixiCanvasSetup.CreatePixiStage(0x666666)
+      expect(stage).toBeDefined()
+      expect(stage.backgroundColorString).toBe('#666666')
 
-  it 'creates a canvas and attaches it to body', ->
-    new PixiCanvasSetup()
-    canvas = document.querySelector('canvas')
+  describe 'CreatePixiRenderer', ->
+    it 'creates a pixi canvas renderer with custom width and height', ->
+      renderer = PixiCanvasSetup.CreatePixiRenderer(100, 200)
+      expect(renderer).toBeDefined()
+      expect(renderer.width).toBe(100)
+      expect(renderer.height).toBe(200)
 
-    expect(document.body.contains(canvas)).toBe(true)
+  describe 'AppendRendererViewToBody', ->
+    it 'Appends provided renderer view to body', ->
+      renderer = PixiCanvasSetup.CreatePixiRenderer(100, 200)
+      PixiCanvasSetup.AppendRendererViewToBody(renderer)
 
-  it 'creates a canvas with custom width, height and background color when specified', ->
-    new PixiCanvasSetup(100, 200, '0x666666')
-    canvas = document.querySelector('canvas')
+      expect(document.querySelector('canvas')).not.toBe(null)
 
-    expect(document.body.contains(canvas)).toBe(true)
-    expect(canvas.width).toBe(100)
-    expect(canvas.height).toBe(200)
-
-  it 'creates a window.stage global variable', ->
-    new PixiCanvasSetup()
-    expect(stage).toBeDefined()
-
-  it 'creates a window.renderer global variable', ->
-    new PixiCanvasSetup()
-    expect(renderer).toBeDefined()
+  describe 'RenderPixiStage', ->
+    it 'Renders Pixi Stage', ->
+      
     
